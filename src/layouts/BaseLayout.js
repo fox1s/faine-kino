@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './BaseLayout.module.css'
+import styles from './BaseLayout.module.css' /* styles конвертує стилі в js об'єкт*/
 
 export const BaseLayout = ({children}) => {
     return (
@@ -7,7 +7,6 @@ export const BaseLayout = ({children}) => {
             <header>header data</header>
             <main>{children}
             </main>
-
             <footer>footer data</footer>
         </div>
     )
