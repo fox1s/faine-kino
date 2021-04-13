@@ -1,0 +1,36 @@
+/*module використовується для того, щоб у випадку повторяння назв класів у різних компонентах, при фінальному обєднанні
+їх у один файл не було конфліктів. Модуль робить приставки спереді з назви компонента, а вкінці рандомні числа. Це
+робить клас унікальним*/
+
+.mainWrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    background-color: #100e19;
+    color: white;
+    padding: 50px 150px;
+
+    /*overflow-y: auto;*/
+}
+
+header {
+    background-color: #1f1b2e;
+    color: white;
+
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+footer {
+    background-color: #1f1b2e;
+    color: white;
+}
+
+header, footer {
+    padding: 10px 150px;
+}
