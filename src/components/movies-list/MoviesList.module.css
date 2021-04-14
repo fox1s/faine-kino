@@ -1,0 +1,5 @@
+
+.tapeMovies{
+    display: flex;
+    flex-direction: row;
+}
