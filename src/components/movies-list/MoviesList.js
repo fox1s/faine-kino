@@ -4,6 +4,8 @@ import './test.css';
 import arrowRight from '../../img/arrow-right.png'
 import arrowLeft from '../../img/arrow-left.png'
 
+// todo порядок з css
+
 export function MoviesList({movies}) {
     // const [flagBtn, setFlagBtn] = useState({counter: 0, flagRight: false, flagLight: false})
     const [flagBtn, setFlagBtn] = useState({flagRight: false})
