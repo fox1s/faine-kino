@@ -1,7 +1,6 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {MoviesList} from "../components";
 import {moviesService} from "../services";
-import {useState, useEffect, useReducer, useMemo, useCallback, memo} from 'react'
 import styles from './Home.module.css'
 
 export const Home = () => {
@@ -11,6 +10,7 @@ export const Home = () => {
     const fetchMovies = async () => {
         try {
             setIsLoading(true)
+            // eslint-disable-next-line no-unused-vars
             const {page, results, total_pages, total_results} = await moviesService.getMovies()
             setMoviesList(results)
         } catch (e) {

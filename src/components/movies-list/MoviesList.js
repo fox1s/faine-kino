@@ -1,19 +1,38 @@
-import MovieItem from "../movie-item/MovieItem";
 import styles from "./MoviesList.module.css";
 import React, {useEffect, useState} from 'react'
-import './test.css'
-
+import './test.css';
+import arrowRight from '../../img/arrow-right.png'
+import arrowLeft from '../../img/arrow-left.png'
 
 export function MoviesList({movies}) {
-    // const [spliceMovies, setSpliceMovies] = useState([])
-    // console.log(spliceMovies)
-    // const movieCarousel = () => {
-    //     const splice = movies.splice(0, 7)
-    //     setSpliceMovies(splice)
-    // }
-    // useEffect(() => {
-    //     movieCarousel()
-    // }, [])
+    // const [flagBtn, setFlagBtn] = useState({counter: 0, flagRight: false, flagLight: false})
+    const [flagBtn, setFlagBtn] = useState({flagRight: false})
+    const [flagBtn2, setFlagBtn2] = useState({flagLeft: true})
+
+
+    let carousel = React.createRef()
+    const listOfPosters = React.createRef()
+
+    let position = 0; // положення стрічки прокрутки
+    let countOfPoster = 7;
+    let widthOfPoster = 153 + 24.2;
+
+    const onClickNextBtn = () => {
+        const allPosterCount = listOfPosters.current.children.length;
+        position -= countOfPoster * widthOfPoster;
+        position = Math.max(position, -widthOfPoster * ((allPosterCount + 1) - countOfPoster))
+
+        listOfPosters.current.style.marginLeft = `${position}px`;   // додаємо марджин з лівого боку, поки не настане
+                                                                    // максимальне допустиме значення.
+    }
+
+    const onClickPrevBtn = () => {
+        position += countOfPoster * widthOfPoster; //рухаєм вліво
+        position = Math.min(position, 0); // якщо стає > 0 (тобто виходить за межі) сетаєм в 0. Це робить межу для руху.
+        listOfPosters.current.style.marginLeft = `${position}px`; // забираємо марджин з лівого боку, поки не стане 0.
+    }
+
+    console.log(flagBtn.flagRight)
 
     return (
         <div className={styles.tapeMovies}>
@@ -21,79 +40,30 @@ export function MoviesList({movies}) {
             {/*{spliceMovies.map((movie) => <MovieItem {...movie} btnRight key={movie.id}/>)}*/}
             {/*<button>left</button>*/}
 
+            <button className="arrow prev" onClick={onClickPrevBtn} disabled={!flagBtn2.flagLeft}>
+                <img className={'imgArrowLeft'} src={arrowLeft}
+                     alt="right Arrow"/>
+            </button>
 
-            {/*{movies.length &&*/}
-            {/*<div id="carouselExampleControls" className="carousel slide">*/}
-            {/*    <div className="carousel-inner">*/}
-            {/*        <div className="carousel-item active ">*/}
-            {/*            <div className="row_custom">*/}
-            {/*                <img src={`https://image.tmdb.org/t/p/w200${movies[0].poster_path}`}*/}
-            {/*                     className="d-block w-100" alt="..."/>*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[1].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[2].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[3].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[4].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[5].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[6].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*            </div>*/}
 
-            {/*        </div>*/}
-            {/*        <div className="carousel-item">*/}
-            {/*            <div>*/}
-            {/*                <img src={`https://image.tmdb.org/t/p/w200${movies[7].poster_path}`}*/}
-            {/*                     className="d-block w-100" alt="..."/>*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[8].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[9].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[10].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[11].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[12].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[13].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*        <div className="carousel-item">*/}
-            {/*            <div className="row_custom">*/}
-            {/*                <img src={`https://image.tmdb.org/t/p/w200${movies[14].poster_path}`}*/}
-            {/*                     className="d-block w-100" alt="..."/>*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[15].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[16].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[17].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[18].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[19].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*                /!*<img src={`https://image.tmdb.org/t/p/w200${movies[18].poster_path}`}*!/*/}
-            {/*                /!*     className="d-block w-100" alt="..."/>*!/*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"*/}
-            {/*            data-bs-slide="prev">*/}
-            {/*        <span className="carousel-control-prev-icon" aria-hidden="true"></span>*/}
-            {/*        <span className="visually-hidden">Предыдущий</span>*/}
-            {/*    </button>*/}
-            {/*    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"*/}
-            {/*            data-bs-slide="next">*/}
-            {/*        <span className="carousel-control-next-icon" aria-hidden="true"></span>*/}
-            {/*        <span className="visually-hidden">Следующий</span>*/}
-            {/*    </button>*/}
-            {/*</div>}*/}
+            <div id="carousel" className="carousel" ref={carousel}>
+                <div className="gallery">
+                    <ul className="images" ref={listOfPosters}>
+                        {movies && movies.map(movie =>
+                            <li key={movie.id}><img className={'posterImg'}
+                                                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                                    alt={`${movie.original_title}`}/></li>
+                        )}
+                        {/*<button className={'btnAllMovies'}>Переглянути усі</button>*/}
+                    </ul>
+                </div>
 
+            </div>
+            <button className="arrow next" onClick={onClickNextBtn} disabled={flagBtn.flagRight}>
+                <img className={'imgArrowRight'} src={arrowRight}
+                     alt="right Arrow"/>
+            </button>
 
         </div>
-);
+    );
 }
