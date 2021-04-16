@@ -1,3 +1,6 @@
-.imgPoster {
-    width: 180px;
+.posterImg {
+    width: 153px;
+    height: 234px;
+    border-radius: 10px;
+    display: block;
 }

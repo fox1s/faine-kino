@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import './test.css';
 import arrowRight from '../../img/arrow-right.png'
 import arrowLeft from '../../img/arrow-left.png'
+import MovieItem from "../movie-item/MovieItem";
 
 // todo порядок з css
 
@@ -20,7 +21,6 @@ export function MoviesList({movies}) {
 
     const onClickNextBtn = () => {
         const allPosterCount = listOfPosters.current.children.length;
-        console.log(listOfPosters.current.children)
         position -= countOfPoster * widthOfPoster;
         position = Math.max(position, -widthOfPoster * ((allPosterCount) - countOfPoster))
         listOfPosters.current.style.marginLeft = `${position}px`;   // додаємо марджин з лівого боку, поки не настане
@@ -38,9 +38,9 @@ export function MoviesList({movies}) {
     return (
         <div className={styles.tapeMovies}>
             {/*{movies.map(movie => <MovieItem movie={movie} key={movie.id}/>)}*/}
-            {/*{spliceMovies.map((movie) => <MovieItem {...movie} btnRight key={movie.id}/>)}*/}
-            {/*<button>left</button>*/}
+
             <div className={'leftArrowDiv'}>
+
                 {btnFlag.leftBtn &&
                 <button className="arrow prev" onClick={onClickPrevBtn}>
                     <img className={'imgArrowLeft'} src={arrowLeft}
@@ -52,23 +52,28 @@ export function MoviesList({movies}) {
             <div id="carousel" className="carousel" ref={carousel}>
                 <div className="gallery">
                     <ul className="images" ref={listOfPosters}>
-                        {movies && movies.map(movie =>
-                            <li key={movie.id}><img className={'posterImg'}
-                                                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                                                    alt={`${movie.original_title}`}/></li>
-                        )}
+                        {movies && movies.map(movie => <MovieItem movie={movie} key={movie.id}/>)}
+
+                        {/*{movies && movies.map(movie =>*/}
+                        {/*    <li key={movie.id}><img className={'posterImg'}*/}
+                        {/*                            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}*/}
+                        {/*                            alt={`${movie.original_title}`}/></li>*/}
+                        {/*)}*/}
+
                         <li className={'li_BtnAllMovies'}>
                             <button className={'btnAllMovies'}><span>Переглянути усі</span></button>
                         </li>
 
                     </ul>
                 </div>
-
             </div>
-            <button className="arrow next" onClick={onClickNextBtn}>
-                <img className={'imgArrowRight'} src={arrowRight}
-                     alt="right Arrow"/>
-            </button>
+            <div className={'rightArrowDiv'}>
+                <button className="arrow next" onClick={onClickNextBtn}>
+                    <img className={'imgArrowRight'} src={arrowRight}
+                         alt="right Arrow"/>
+                </button>
+            </div>
+
 
         </div>
     );

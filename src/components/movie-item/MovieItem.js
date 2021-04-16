@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './MovieItem.module.css'
 
 export default function MovieItem(props) {
-    const {original_title, poster_path} = props
+    const {movie: {poster_path, original_title}} = props;
+
     // const {original_title, vote_average, release_date, poster_path} = props
 // adult: false
 // backdrop_path: "/vfuzELmhBjBTswXj2Vqxnu5ge4g.jpg"
@@ -20,12 +21,12 @@ export default function MovieItem(props) {
 // vote_average: 6.4
 // vote_count: 740
     return (
-        <div className={'movieItem'}>
-            <div>
-                <img className={styles.imgPoster} src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                     alt={`${original_title} poster`}/>
-            </div>
-            <div>{original_title}</div>
-        </div>
+
+        <li>
+            <img className={styles.posterImg}
+                 src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                 alt={`${original_title}`}/>
+        </li>
+
     );
 }

@@ -6,15 +6,6 @@
 
 }
 
-.carousel .posterImg {
-    width: 153px;
-    height: 234px;
-
-    border-radius: 10px;
-
-    /* делаем этот элемент блочным, чтобы убрать лишнее пространство вокруг картинок */
-    display: block;
-}
 
 .arrow {
     /*position: absolute;*/
@@ -50,18 +41,23 @@
 
 
 .leftArrowDiv {
-    margin-top: 95px;
+    margin-top: 118px;
     margin-left: -17px;
+    height: 50px;
+    width: 50px;
+}
+
+.rightArrowDiv {
+    margin-top: 118px;
+    margin-right: -15px;
     height: 50px;
     width: 50px;
 }
 
 .next {
     right: 0;
-    margin-top: 118px;
-    margin-right: -15px;
-    margin-left: 0;
-    outline: none; /* Для синий ободки */
+    /*margin-left: 0;*/
+    outline: none; /* Для синьої обводки */
     border: 0;
     background: transparent;
     height: 50px;
