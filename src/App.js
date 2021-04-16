@@ -7,6 +7,7 @@ function App() {
     return (
         <BaseLayout>
             <Home></Home>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         </BaseLayout>
     );
 }

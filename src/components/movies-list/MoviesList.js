@@ -7,9 +7,8 @@ import arrowLeft from '../../img/arrow-left.png'
 // todo порядок з css
 
 export function MoviesList({movies}) {
-    // const [flagBtn, setFlagBtn] = useState({counter: 0, flagRight: false, flagLight: false})
-    const [flagBtn, setFlagBtn] = useState({flagRight: false})
-    const [flagBtn2, setFlagBtn2] = useState({flagLeft: true})
+    const [btnFlag, setBtnFlag] = useState({rightBtn: false, leftBtn: true});
+    // const [counter, setCounter] = useState(0)
 
 
     let carousel = React.createRef()
@@ -21,12 +20,13 @@ export function MoviesList({movies}) {
 
     const onClickNextBtn = () => {
         const allPosterCount = listOfPosters.current.children.length;
+        console.log(listOfPosters.current.children)
         position -= countOfPoster * widthOfPoster;
-        position = Math.max(position, -widthOfPoster * ((allPosterCount + 1) - countOfPoster))
-
+        position = Math.max(position, -widthOfPoster * ((allPosterCount) - countOfPoster))
         listOfPosters.current.style.marginLeft = `${position}px`;   // додаємо марджин з лівого боку, поки не настане
-                                                                    // максимальне допустиме значення.
+        // максимальне допустиме значення.
     }
+
 
     const onClickPrevBtn = () => {
         position += countOfPoster * widthOfPoster; //рухаєм вліво
@@ -34,18 +34,19 @@ export function MoviesList({movies}) {
         listOfPosters.current.style.marginLeft = `${position}px`; // забираємо марджин з лівого боку, поки не стане 0.
     }
 
-    console.log(flagBtn.flagRight)
 
     return (
         <div className={styles.tapeMovies}>
             {/*{movies.map(movie => <MovieItem movie={movie} key={movie.id}/>)}*/}
             {/*{spliceMovies.map((movie) => <MovieItem {...movie} btnRight key={movie.id}/>)}*/}
             {/*<button>left</button>*/}
-
-            <button className="arrow prev" onClick={onClickPrevBtn} disabled={!flagBtn2.flagLeft}>
-                <img className={'imgArrowLeft'} src={arrowLeft}
-                     alt="right Arrow"/>
-            </button>
+            <div className={'leftArrowDiv'}>
+                {btnFlag.leftBtn &&
+                <button className="arrow prev" onClick={onClickPrevBtn}>
+                    <img className={'imgArrowLeft'} src={arrowLeft}
+                         alt="right Arrow"/>
+                </button>}
+            </div>
 
 
             <div id="carousel" className="carousel" ref={carousel}>
@@ -56,12 +57,15 @@ export function MoviesList({movies}) {
                                                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                                                     alt={`${movie.original_title}`}/></li>
                         )}
-                        {/*<button className={'btnAllMovies'}>Переглянути усі</button>*/}
+                        <li className={'li_BtnAllMovies'}>
+                            <button className={'btnAllMovies'}><span>Переглянути усі</span></button>
+                        </li>
+
                     </ul>
                 </div>
 
             </div>
-            <button className="arrow next" onClick={onClickNextBtn} disabled={flagBtn.flagRight}>
+            <button className="arrow next" onClick={onClickNextBtn}>
                 <img className={'imgArrowRight'} src={arrowRight}
                      alt="right Arrow"/>
             </button>
