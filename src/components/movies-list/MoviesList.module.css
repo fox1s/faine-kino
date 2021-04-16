@@ -1,4 +1,4 @@
-.tapeMovies{
+.tapeMovies {
     display: flex;
     flex-direction: row;
 }
@@ -16,6 +16,10 @@
     margin-right: -15px;
     height: 50px;
     width: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .imgArrowRight, .imgArrowLeft {
@@ -35,20 +39,28 @@
     line-height: 24px;
     color: #444;
     display: block;
+
+    opacity: 0.7;
 }
 
 .arrow:focus {
     outline: none;
+
 }
 
 .arrow:hover {
     cursor: pointer;
+    opacity: 1;
 }
 
+.arrow>img:active {
+    width: 20px;
+    height: 29px;
+    /*background-color: red;*/
+}
+
+
 .prev {
-    /*left: 0;*/
-    /*margin-top: 95px;*/
-    /*margin-left: -17px;*/
     outline: none; /* Для синий ободки */
     border: 0;
     background: transparent;
@@ -58,13 +70,13 @@
 
 .next {
     right: 0;
-    /*margin-left: 0;*/
     outline: none; /* Для синьої обводки */
     border: 0;
     background: transparent;
     height: 50px;
     width: 50px;
 }
+
 /*///////////////////////////////*/
 
 
