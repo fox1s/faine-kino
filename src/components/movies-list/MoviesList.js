@@ -8,7 +8,6 @@ import MovieItem from "../movie-item/MovieItem";
 
 export function MoviesList({movies}) {
     const [btnFlag, setBtnFlag] = useState({rightBtn: true, leftBtn: true});
-    // const [counter, setCounter] = useState(1);
 
 
     let carousel = React.createRef()
@@ -32,54 +31,6 @@ export function MoviesList({movies}) {
         listOfPosters.current.style.marginLeft = `${position}px`; // забираємо марджин з лівого боку, поки не стане 0.
     }
 
-
-    const flag = () => {
-
-        // switch (btnFlag.counter) {
-        //     case 1: {
-        //         setBtnFlag({counter: btnFlag.counter, rightBtn: true, leftBtn: false})
-        //         console.log(btnFlag.counter)
-        //         break;
-        //     }
-        //     case 2: {
-        //         setBtnFlag({counter: btnFlag.counter, rightBtn: true, leftBtn: true})
-        //         break
-        //     }
-        //     case 3: {
-        //         setBtnFlag({counter: btnFlag.counter, rightBtn: false, leftBtn: true})
-        //         break;
-        //     }
-        //     default: {
-        //         break;
-        //     }
-        // }
-    }
-
-    // let clicks = 0;
-    // let leftBtn = false;
-    // let rightBtn = true;
-    // const clickNext = () => {
-    //     clicks += 1;
-    //     console.log(clicks)
-    //     if (clicks === 2) {
-    //         rightBtn = false;
-    //     } else {
-    //         // rightBtn=true;
-    //         leftBtn=true;
-    //     }
-    // }
-    //
-    // useEffect(() => {
-    //     console.log('ssss')
-    // },[clickNext])
-    //
-    // const clickPrev = () => {
-    //     clicks -= 1;
-    //     console.log(clicks)
-    //     if (clicks === 0) {
-    //     }
-    // }
-
     return (
         <div className={styles.tapeMovies}>
 
@@ -88,7 +39,6 @@ export function MoviesList({movies}) {
                     btnFlag.leftBtn &&
                     <button className={`${styles.arrow} ${styles.prev}`} onClick={() => {
                         onClickPrevBtn()
-                        // clickPrev()
                     }}>
                         <img className={styles.imgArrowLeft} src={arrowLeft}
                              alt="right Arrow"/>
@@ -116,7 +66,6 @@ export function MoviesList({movies}) {
                     btnFlag.rightBtn &&
                     <button className={`${styles.arrow} ${styles.next}`} onClick={() => {
                         onClickNextBtn()
-                        // clickNext()
                     }}>
                         <img className={styles.imgArrowRight} src={arrowRight}
                              alt="right Arrow"/>

@@ -3,4 +3,19 @@
     height: 234px;
     border-radius: 10px;
     display: block;
+
+    transition: transform 0.5s;
+}
+
+.liPoster {
+    /*transition: transform 2s;*/
+}
+
+.liPoster :hover {
+    opacity: 0.4;
+    transition: 0.5s;
+
+    -ms-transform: scale(1.06); /* IE 9 */
+    -webkit-transform: scale(1.06); /* Safari 3-8 */
+    transform: scale(1.06);
 }

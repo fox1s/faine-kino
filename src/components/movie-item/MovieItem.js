@@ -22,7 +22,7 @@ export default function MovieItem(props) {
 // vote_count: 740
     return (
 
-        <li>
+        <li className={styles.liPoster}>
             <img className={styles.posterImg}
                  src={`https://image.tmdb.org/t/p/w500${poster_path}`}
                  alt={`${original_title}`}/>
