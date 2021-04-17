@@ -20,12 +20,21 @@ export default function MovieItem(props) {
 // video: false
 // vote_average: 6.4
 // vote_count: 740
+
+    // if (original_title.length > 16) {
+    //     original_title.slice(0, 16).concat('...')
+    // }
+    // console.log(original_title)
+
     return (
 
-        <li className={styles.liPoster}>
-            <img className={styles.posterImg}
-                 src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                 alt={`${original_title}`}/>
+        <li>
+            <div className={styles.liPoster}>
+                <img className={styles.posterImg}
+                     src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                     alt={`${original_title}`}/>
+            </div>
+            <div className={styles.miniDescribe}>{original_title}</div>
         </li>
 
     );

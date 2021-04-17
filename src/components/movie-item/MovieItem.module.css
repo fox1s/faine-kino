@@ -3,12 +3,11 @@
     height: 234px;
     border-radius: 10px;
     display: block;
-
     transition: transform 0.5s;
 }
 
 .liPoster {
-    /*transition: transform 2s;*/
+
 }
 
 .liPoster :hover {
@@ -18,4 +17,22 @@
     -ms-transform: scale(1.06); /* IE 9 */
     -webkit-transform: scale(1.06); /* Safari 3-8 */
     transform: scale(1.06);
+    cursor: pointer;
+}
+
+.hiddenInfo {
+    font-size: 15px;
+}
+
+.miniDescribe {
+    width: 153px;
+    margin-top:4px ;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
 }
