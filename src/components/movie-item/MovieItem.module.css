@@ -9,17 +9,7 @@
 }
 
 
-.liPoster > div > .imgDiv :hover {
-    opacity: 0.4;
-    transition: 0.5s;
-
-    -ms-transform: scale(1.06); /* IE 9 */
-    -webkit-transform: scale(1.06); /* Safari 3-8 */
-    transform: scale(1.06);
-    cursor: pointer;
-}
-
-/*.liPoster>div>div :hover {*/
+/*.liPoster > div > .imgDiv :hover {*/
 /*    opacity: 0.4;*/
 /*    transition: 0.5s;*/
 
@@ -53,5 +43,6 @@
     position: absolute;
     /*z-index: 1;*/
     /*display: none;*/
+    margin-left: 10px;
 
 }

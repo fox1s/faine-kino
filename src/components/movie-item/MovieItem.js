@@ -21,23 +21,37 @@ export default function MovieItem(props) {
 // vote_average: 6.4
 // vote_count: 740
 
-    const liPosterDiv = React.createRef()
+    const liPosterDiv = React.createRef();
+
 
     const onMouseOver = () => {
-        // console.log(liPosterDiv.current.children);
-        // liPosterDiv.current.children[0].style.zIndex = 1;
-        // liPosterDiv.current.children[1].style.transform = 'scale(1.06)';
-        // liPosterDiv.current.children[1].style.transition = '0.5s';
-        // liPosterDiv.current.children[1].style.opacity = '0.4';
+        let details = liPosterDiv.current.children[0];
+        let posterDiv = liPosterDiv.current.children[1];
+
+        details.style.zIndex = 1;
+        details.style.cursor = 'pointer';
+
+        details.style.transform = 'scale(1.06)';
+        details.style.transition = '0.4s'
+
+        posterDiv.style.transform = 'scale(1.06)';
+        posterDiv.style.transition = '0.4s';
+        posterDiv.style.opacity = '0.3';
 
     }
 
     const onMouseOut = () => {
-        // console.log(liPosterDiv.current.children);
-        liPosterDiv.current.children[0].style.zIndex = 0;
-        // liPosterDiv.current.children[1].style.transform = 'scale(1)';
-        // liPosterDiv.current.children[1].style.transition = '0s';
-        // liPosterDiv.current.children[1].style.opacity = '1';
+        let details = liPosterDiv.current.children[0];
+        let posterDiv = liPosterDiv.current.children[1];
+
+        details.style.zIndex = 0;
+
+        details.style.transform = 'scale(1)';
+        details.style.transition = '0.4s'
+
+        posterDiv.style.transform = 'scale(1)';
+        posterDiv.style.transition = '0.4s';
+        posterDiv.style.opacity = '1';
 
     }
 
