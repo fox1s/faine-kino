@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './MovieItem.module.css'
 
 export default function MovieItem(props) {
-    const {movie: {poster_path, original_title}} = props;
+    const {movie: {poster_path, original_title, vote_average, release_date}} = props;
 
     // const {original_title, vote_average, release_date, poster_path} = props
 // adult: false
@@ -21,18 +21,45 @@ export default function MovieItem(props) {
 // vote_average: 6.4
 // vote_count: 740
 
-    // if (original_title.length > 16) {
-    //     original_title.slice(0, 16).concat('...')
-    // }
-    // console.log(original_title)
+    const liPosterDiv = React.createRef()
+
+    const onMouseOver = () => {
+        // console.log(liPosterDiv.current.children);
+        // liPosterDiv.current.children[0].style.zIndex = 1;
+        // liPosterDiv.current.children[1].style.transform = 'scale(1.06)';
+        // liPosterDiv.current.children[1].style.transition = '0.5s';
+        // liPosterDiv.current.children[1].style.opacity = '0.4';
+
+    }
+
+    const onMouseOut = () => {
+        // console.log(liPosterDiv.current.children);
+        liPosterDiv.current.children[0].style.zIndex = 0;
+        // liPosterDiv.current.children[1].style.transform = 'scale(1)';
+        // liPosterDiv.current.children[1].style.transition = '0s';
+        // liPosterDiv.current.children[1].style.opacity = '1';
+
+    }
 
     return (
-
         <li>
-            <div className={styles.liPoster}>
-                <img className={styles.posterImg}
-                     src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                     alt={`${original_title}`}/>
+            <div className={styles.liPoster} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+                <div ref={liPosterDiv}>
+                    <div className={styles.text}>
+                        <span>efew</span> <br/>
+                        <span>vote_average</span> <br/>
+                        <span>{release_date}</span> <br/>
+                        <span>{vote_average}</span>
+                    </div>
+                    <div className={styles.imgDiv}>
+                        <img className={styles.posterImg}
+                             src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                             alt={`${original_title}`}/>
+                    </div>
+
+                </div>
+
+
             </div>
             <div className={styles.miniDescribe}>{original_title}</div>
         </li>
