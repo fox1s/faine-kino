@@ -71,7 +71,7 @@ export function MoviesList({movies}) {
 
                         {movies && movies.map(movie => <MovieItem movie={movie} key={movie.id}/>)}
 
-                        <li>
+                        <li className={styles.li_BtnAllMovies}>
                             <button className={styles.btnAllMovies}><span>Переглянути усі</span></button>
                         </li>
 

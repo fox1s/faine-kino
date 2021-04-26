@@ -51,7 +51,6 @@
 
 .arrow:focus {
     outline: none;
-
 }
 
 .arrow:hover {
@@ -61,9 +60,6 @@
 
 .arrow:active {
     transform: scale(0.88);
-    /*width: 47px;*/
-    /*height: 233px;*/
-    /*background-color: red;*/
 }
 
 
@@ -103,8 +99,8 @@
     position: absolute;
 }
 
-.gallery{
-    
+.gallery {
+
 }
 
 .gallery ul {
@@ -132,7 +128,7 @@
     width: 153px;
     height: 234px;
     border-radius: 10px;
-    outline: none; /* Для синий ободки */
+    outline: none; /* Для синої обводки */
     border: 0;
     background-color: #1f1b2e;
     color: #eaeaea;
@@ -147,6 +143,12 @@
     -webkit-transform: scale(1.2);
     -ms-transform: scale(1.2);
     transform: scale(1.05);
+}
+
+
+.li_BtnAllMovies :active {
+    transform: scale(1);
+    transition: 0.0001s;
 }
 
 /*///////////////////////////////*/

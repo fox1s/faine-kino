@@ -8,6 +8,9 @@
     position: relative;
 }
 
+.liPoster :active{
+    transform: scale(0.97);
+}
 
 /*.liPoster > div > .imgDiv :hover {*/
 /*    opacity: 0.4;*/
