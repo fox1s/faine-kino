@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './MovieItem.module.css'
+import CustomProgressBar from "../progressbar/CustomProgressBar";
 
 export default function MovieItem(props) {
-    const {movie: {poster_path, original_title, vote_average, release_date}} = props;
+    const {movie: {poster_path, original_title, vote_average, release_date, original_language}} = props;
 
     // const {original_title, vote_average, release_date, poster_path} = props
 // adult: false
@@ -22,7 +23,7 @@ export default function MovieItem(props) {
 // vote_count: 740
 
     const liPosterDiv = React.createRef();
-
+    const [voteFlag, setVoteFlag] = useState(false)
 
     const onMouseOver = () => {
         let details = liPosterDiv.current.children[0];
@@ -37,7 +38,7 @@ export default function MovieItem(props) {
         posterDiv.style.transform = 'scale(1.06)';
         posterDiv.style.transition = '0.4s';
         posterDiv.style.opacity = '0.3';
-
+        setVoteFlag(true)
     }
 
     const onMouseOut = () => {
@@ -52,18 +53,32 @@ export default function MovieItem(props) {
         posterDiv.style.transform = 'scale(1)';
         posterDiv.style.transition = '0.4s';
         posterDiv.style.opacity = '1';
-
+        setVoteFlag(false)
     }
 
+
     return (
-        <li onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+        <li onMouseEnter={onMouseOver} onMouseLeave={onMouseOut}>
             <div className={styles.liPoster}>
                 <div ref={liPosterDiv}>
                     <div className={styles.text}>
-                        <span>efew</span> <br/>
-                        <span>vote_average</span> <br/>
-                        <span>{release_date}</span> <br/>
-                        <span>{vote_average}</span>
+                        <div className={styles.miniDescriptionMenu}>закладка</div>
+                        <div className={styles.miniDescription}>
+                            <div className={styles.vote_averageDiv}>
+                                <span
+                                    className={styles.vote_average}>{vote_average % 1 !== 0 ? vote_average : vote_average + '.0'}</span>
+                                <div className={styles.customProgressBar}>
+                                    {voteFlag && <CustomProgressBar valueEnd={vote_average}/>}
+                                </div>
+
+                            </div>
+
+                            <span>{release_date.slice(0, 4)}, </span>
+                            <span>{original_language.toUpperCase()},</span> <br/>
+                            <span>Action</span> <br/>
+                            <span>{(Math.random() * (200 - 60) + 60).toFixed()} minutes</span>
+                        </div>
+
                     </div>
                     <div className={styles.imgDiv}>
                         <img className={styles.posterImg}
