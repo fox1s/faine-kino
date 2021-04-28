@@ -56,8 +56,8 @@ export default function MovieItem(props) {
     }
 
     return (
-        <li>
-            <div className={styles.liPoster} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+        <li onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+            <div className={styles.liPoster}>
                 <div ref={liPosterDiv}>
                     <div className={styles.text}>
                         <span>efew</span> <br/>

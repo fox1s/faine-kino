@@ -133,7 +133,7 @@
     background-color: #1f1b2e;
     color: #eaeaea;
     font-size: 18px;
-    transition: all 0.5s ease;
+    transition: 0.4s;
 
     opacity: 0.6;
 }
@@ -147,8 +147,14 @@
 
 
 .li_BtnAllMovies :active {
-    transform: scale(1);
-    transition: 0.0001s;
+    transform: scale(1.02);
+    transition: 0.00001ms;
 }
+
+
+/*.li_BtnAllMovies {*/
+/*    transition: 0.00001ms;*/
+/*       transform: scale(1);*/
+/*}*/
 
 /*///////////////////////////////*/
