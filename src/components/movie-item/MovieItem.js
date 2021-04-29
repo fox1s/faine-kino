@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import styles from './MovieItem.module.css'
 import CustomProgressBar from "../progressbar/CustomProgressBar";
+import wishList_chosen from '../../img/wishListOfFilms-CHOOSEN.png.png'
+import wishList_Not_chosen from '../../img/wishListOfFilms-NOT_CHOOSEN.png'
 
 export default function MovieItem(props) {
     const {movie: {poster_path, original_title, vote_average, release_date, original_language}} = props;
+    const [wishListFlag, setWishListFlag] = useState(false);
 
     // const {original_title, vote_average, release_date, poster_path} = props
 // adult: false
@@ -56,13 +59,27 @@ export default function MovieItem(props) {
         setVoteFlag(false)
     }
 
-
+    const wishlistHandler = () => {
+        if (wishListFlag === false) {
+            setWishListFlag(true)
+            return
+        }
+       setWishListFlag(false)
+    }
     return (
         <li onMouseEnter={onMouseOver} onMouseLeave={onMouseOut}>
             <div className={styles.liPoster}>
                 <div ref={liPosterDiv}>
                     <div className={styles.text}>
-                        <div className={styles.miniDescriptionMenu}>закладка</div>
+
+                        <div className={styles.miniDescriptionMenu}>
+                            <div className={styles.imgWishList_Div} onClick={wishlistHandler}>
+                                <img src={wishListFlag === false ? wishList_Not_chosen : wishList_chosen}
+                                     alt="wishList" width={20} height={20}/>
+                            </div>
+
+                        </div>
+
                         <div className={styles.miniDescription}>
                             <div className={styles.vote_averageDiv}>
                                 <span
