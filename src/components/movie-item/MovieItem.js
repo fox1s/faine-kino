@@ -14,8 +14,10 @@ export default function MovieItem({onFilmClick, movie}) {
         movieGenresList
     } = movie;
 
-    const [wishListFlag, setWishListFlag] = useState(false);
 
+
+
+    const [wishListFlag, setWishListFlag] = useState(false);
     // const {original_title, vote_average, release_date, poster_path} = props
 // adult: false
 // backdrop_path: "/vfuzELmhBjBTswXj2Vqxnu5ge4g.jpg"
