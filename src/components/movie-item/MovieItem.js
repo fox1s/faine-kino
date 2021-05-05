@@ -5,7 +5,7 @@ import wishList_chosen from '../../img/wishListOfFilms-CHOOSEN.png.png'
 import wishList_Not_chosen from '../../img/wishListOfFilms-NOT_CHOOSEN.png'
 
 export default function MovieItem(props) {
-    const {movie: {poster_path, original_title, vote_average, release_date, original_language}} = props;
+    const {movie: {poster_path, original_title, vote_average, release_date, original_language, movieGenresList}} = props;
     const [wishListFlag, setWishListFlag] = useState(false);
 
     // const {original_title, vote_average, release_date, poster_path} = props
@@ -24,6 +24,10 @@ export default function MovieItem(props) {
 // video: false
 // vote_average: 6.4
 // vote_count: 740
+
+// movieGenresList
+
+    const imgBuilder = (poster_path, img_size = 500) => `https://image.tmdb.org/t/p/w${img_size}${poster_path}`
 
     const liPosterDiv = React.createRef();
     const [voteFlag, setVoteFlag] = useState(false)
@@ -64,7 +68,7 @@ export default function MovieItem(props) {
             setWishListFlag(true)
             return
         }
-       setWishListFlag(false)
+        setWishListFlag(false)
     }
     return (
         <li onMouseEnter={onMouseOver} onMouseLeave={onMouseOut}>
@@ -92,14 +96,14 @@ export default function MovieItem(props) {
 
                             <span>{release_date.slice(0, 4)}, </span>
                             <span>{original_language.toUpperCase()},</span> <br/>
-                            <span>Action</span> <br/>
+                            <span>{movieGenresList[0].name}</span> <br/>
                             <span>{(Math.random() * (200 - 60) + 60).toFixed()} minutes</span>
                         </div>
 
                     </div>
-                    <div className={styles.imgDiv}>
+                    <div>
                         <img className={styles.posterImg}
-                             src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                             src={imgBuilder(poster_path)}
                              alt={`${original_title}`}/>
                     </div>
 

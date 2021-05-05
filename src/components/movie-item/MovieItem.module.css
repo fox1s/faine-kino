@@ -95,6 +95,6 @@ li {
     height: 26px;
     display: flex;
     width: 22px;
-    align-items: end;
+    align-items: flex-end;
     justify-content: center;
 }

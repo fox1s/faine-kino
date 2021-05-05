@@ -4,7 +4,6 @@ import arrowRight from '../../img/arrow-right.png'
 import arrowLeft from '../../img/arrow-left.png'
 import MovieItem from "../movie-item/MovieItem";
 
-// todo логіка кнопок
 
 export function MoviesList({movies}) {
     const [btnFlag, setBtnFlag] = useState({rightBtn: true, leftBtn: false});
