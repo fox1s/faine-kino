@@ -1,11 +1,19 @@
 import React, {useState} from 'react';
 import styles from './MovieItem.module.css'
 import CustomProgressBar from "../progressbar/CustomProgressBar";
-import wishList_chosen from '../../img/wishListOfFilms-CHOOSEN.png.png'
-import wishList_Not_chosen from '../../img/wishListOfFilms-NOT_CHOOSEN.png'
+import wishList_chosen from '../../img/wishListOfFilms-CHOOSEN.png.png';
+import wishList_Not_chosen from '../../img/wishListOfFilms-NOT_CHOOSEN.png';
 
-export default function MovieItem(props) {
-    const {movie: {poster_path, original_title, vote_average, release_date, original_language, movieGenresList}} = props;
+export default function MovieItem({onFilmClick, movie}) {
+    const {
+        poster_path,
+        original_title,
+        vote_average,
+        release_date,
+        original_language,
+        movieGenresList
+    } = movie;
+
     const [wishListFlag, setWishListFlag] = useState(false);
 
     // const {original_title, vote_average, release_date, poster_path} = props
@@ -30,7 +38,7 @@ export default function MovieItem(props) {
     const imgBuilder = (poster_path, img_size = 500) => `https://image.tmdb.org/t/p/w${img_size}${poster_path}`
 
     const liPosterDiv = React.createRef();
-    const [voteFlag, setVoteFlag] = useState(false)
+    const [voteFlag, setVoteFlag] = useState(false);
 
     const onMouseOver = () => {
         let details = liPosterDiv.current.children[0];
@@ -70,8 +78,9 @@ export default function MovieItem(props) {
         }
         setWishListFlag(false)
     }
+    // todo можливо досить буде прокинути лише айді з муві =>>>> onClick={() => onFilmClick(movie.id)}
     return (
-        <li onMouseEnter={onMouseOver} onMouseLeave={onMouseOut}>
+        <li onMouseEnter={onMouseOver} onMouseLeave={onMouseOut} onClick={() => onFilmClick(movie)}>
             <div className={styles.liPoster}>
                 <div ref={liPosterDiv}>
                     <div className={styles.text}>

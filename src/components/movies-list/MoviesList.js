@@ -3,13 +3,15 @@ import React, {useState} from 'react'
 import arrowRight from '../../img/arrow-right.png'
 import arrowLeft from '../../img/arrow-left.png'
 import MovieItem from "../movie-item/MovieItem";
+import {useHistory} from "react-router-dom";
 
 
 export function MoviesList({movies}) {
     const [btnFlag, setBtnFlag] = useState({rightBtn: true, leftBtn: false});
     const [statePosition, setStatePosition] = useState(0); // положення стрічки прокрутки
 
-    const listOfPosters = React.createRef()
+    const listOfPosters = React.createRef();
+    const history = useHistory();
 
     let countOfPoster = 7;
     let widthOfPoster = 177.2;
@@ -48,6 +50,13 @@ export function MoviesList({movies}) {
         }
     }
 
+    const onFilmClick = async (movie) => {
+        await setTimeout(() => {
+            history.push(`/movie/${movie.id}`)
+        }, 350)
+
+    }
+
     return (
         <div className={styles.tapeMovies}>
 
@@ -68,7 +77,8 @@ export function MoviesList({movies}) {
                 <div className={styles.gallery}>
                     <ul className={styles.images} ref={listOfPosters}>
 
-                        {movies && movies.map(movie => <MovieItem movie={movie} key={movie.id}/>)}
+                        {movies && movies.map(movie => <MovieItem movie={movie} onFilmClick={onFilmClick}
+                                                                  key={movie.id}/>)}
 
                         <li className={styles.li_BtnAllMovies}>
                             <button className={styles.btnAllMovies}><span>Переглянути усі</span></button>

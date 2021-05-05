@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {MoviesList} from "../components";
-import {genresService, moviesService} from "../services";
+import {MoviesList} from "../../components";
+import {genresService, moviesService} from "../../services";
 import styles from './Home.module.css'
 
 export const Home = () => {
