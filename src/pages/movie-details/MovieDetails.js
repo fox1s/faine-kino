@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';
 import {moviesService} from "../../services";
+import styles from "./MovieDetails.module.css";
+import {imgBuilder} from "../../services/imgBuilder";
+
+import clock from '../../img/clock.png'
+import CustomProgressBar from "../../components/progressbar/CustomProgressBar";
 
 export default function MovieDetails() {
     const [movieDetails, setMovieDetails] = useState([]);
@@ -18,20 +23,68 @@ export default function MovieDetails() {
         } finally {
             setIsLoading(false);
         }
+    }
+    const {vote_average} = movieDetails;
+    if (vote_average) {
 
+        console.log(vote_average.toString()[0]);
     }
 
     useEffect(() => {
         getMovieDetails().then(r => r);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    if (isLoading === true || isLoading === null) {
+    if (isLoading || !movieDetails || isLoading === null) {
         return <div>Loading...</div>
     }
-
     return (
-        <div>
-            {movieDetails.original_title}
+        <div className={styles.movieDetails_wrapper}>
+            <div className={styles.movieDetails}>
+                <div className={styles.title_div}>{movieDetails.original_title}</div>
+                <div className={styles.tagline_div}>{movieDetails.tagline}</div>
+
+                <div className={styles.detailsCommon}>
+                    <div>
+                        <img src={imgBuilder(movieDetails.poster_path)}
+                             alt={movieDetails.original_title + 'poster'}
+                             className={styles.imgPosterDetails}
+                        />
+                    </div>
+
+                    <div className={styles.right_detailsCommon}>
+                        <div className={styles.customProgressBar}>
+                            <div className={styles.textRating_Div}>
+                                <div>
+                                    <span className={styles.firstVoteNumber}>{movieDetails.vote_average.toString()[0]}</span>
+                                    <span className={styles.secondVoteNumber}>,{movieDetails.vote_average.toString()[2]}</span>
+                                </div>
+                                <div className={styles.textRating}>Rating f-kino</div>
+                            </div>
+
+                            <CustomProgressBar valueEnd={movieDetails.vote_average} widthCustom={70} strokeWidth={17}/>
+                        </div>
+
+                        <div>Release date {movieDetails.release_date}</div>
+                        <div>Languages: {movieDetails.spoken_languages.map((lan, i) =>
+                            <span key={i}>
+                                {lan.english_name}{i !== movieDetails.spoken_languages.length - 1 && ', '}
+                            </span>)}
+                        </div>
+                        <div>{movieDetails.tagline}</div>
+                        <div>
+                            <img src={clock} alt="clock" width={18}/> {movieDetails.runtime} minutes
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className={styles.detailsDescription}>
+                    <div>Description</div>
+                    <p>{movieDetails.overview}</p>
+                </div>
+
+            </div>
+
         </div>
     );
 }

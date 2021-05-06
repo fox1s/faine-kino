@@ -1,7 +1,7 @@
 import styles from "./MoviesList.module.css";
 import React, {useState} from 'react'
-import arrowRight from '../../img/arrow-right.png'
-import arrowLeft from '../../img/arrow-left.png'
+import arrowRight from '../../img/arrow-right.png';
+import arrowLeft from '../../img/arrow-left.png';
 import MovieItem from "../movie-item/MovieItem";
 import {useHistory} from "react-router-dom";
 

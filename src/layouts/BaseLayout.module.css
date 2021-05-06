@@ -6,6 +6,8 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: iviSans, Arial, Helvetica, Helvetica Neue, FreeSans, sans-serif;
+
 }
 
 main {

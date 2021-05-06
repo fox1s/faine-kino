@@ -3,6 +3,7 @@ import styles from './MovieItem.module.css'
 import CustomProgressBar from "../progressbar/CustomProgressBar";
 import wishList_chosen from '../../img/wishListOfFilms-CHOOSEN.png.png';
 import wishList_Not_chosen from '../../img/wishListOfFilms-NOT_CHOOSEN.png';
+import {imgBuilder} from "../../services/imgBuilder";
 
 export default function MovieItem({onFilmClick, movie}) {
     const {
@@ -36,8 +37,6 @@ export default function MovieItem({onFilmClick, movie}) {
 // vote_count: 740
 
 // movieGenresList
-
-    const imgBuilder = (poster_path, img_size = 500) => `https://image.tmdb.org/t/p/w${img_size}${poster_path}`
 
     const liPosterDiv = React.createRef();
     const [voteFlag, setVoteFlag] = useState(false);
@@ -100,7 +99,7 @@ export default function MovieItem({onFilmClick, movie}) {
                                 <span
                                     className={styles.vote_average}>{vote_average % 1 !== 0 ? vote_average : vote_average + '.0'}</span>
                                 <div className={styles.customProgressBar}>
-                                    {voteFlag && <CustomProgressBar valueEnd={vote_average}/>}
+                                    {voteFlag && <CustomProgressBar valueEnd={vote_average} widthCustom={22} strokeWidth={17}/>}
                                 </div>
 
                             </div>
