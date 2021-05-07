@@ -17,17 +17,13 @@ export default function MovieDetails() {
         try {
             setIsLoading(true);
             const data = await moviesService.getMovieDetailsById(id);
+            console.log(data)
             setMovieDetails(data);
         } catch (e) {
             console.error(e)
         } finally {
             setIsLoading(false);
         }
-    }
-    const {vote_average} = movieDetails;
-    if (vote_average) {
-
-        console.log(vote_average.toString()[0]);
     }
 
     useEffect(() => {
@@ -40,7 +36,7 @@ export default function MovieDetails() {
     return (
         <div className={styles.movieDetails_wrapper}>
             <div className={styles.movieDetails}>
-                <div className={styles.title_div}>{movieDetails.original_title}</div>
+                <div className={styles.title_div}>{movieDetails.title}</div>
                 <div className={styles.tagline_div}>{movieDetails.tagline}</div>
 
                 <div className={styles.detailsCommon}>
@@ -55,13 +51,16 @@ export default function MovieDetails() {
                         <div className={styles.customProgressBar}>
                             <div className={styles.textRating_Div}>
                                 <div>
-                                    <span className={styles.firstVoteNumber}>{movieDetails.vote_average.toString()[0]}</span>
-                                    <span className={styles.secondVoteNumber}>,{movieDetails.vote_average.toString()[2]}</span>
+                                    <span
+                                        className={styles.firstVoteNumber}>{movieDetails.vote_average.toString()[0]}</span>
+                                    <span
+                                        className={styles.secondVoteNumber}>,{movieDetails.vote_average.toString()[2]}</span>
                                 </div>
                                 <div className={styles.textRating}>Rating f-kino</div>
                             </div>
 
-                            <CustomProgressBar valueEnd={movieDetails.vote_average} widthCustom={70} strokeWidth={17}/>
+                            <CustomProgressBar valueEnd={movieDetails.vote_average} widthCustom={70} strokeWidth={17}
+                                /*roundedValue={movieDetails.vote_count}*//>
                         </div>
 
                         <div>Release date {movieDetails.release_date}</div>
@@ -70,7 +69,19 @@ export default function MovieDetails() {
                                 {lan.english_name}{i !== movieDetails.spoken_languages.length - 1 && ', '}
                             </span>)}
                         </div>
-                        <div>{movieDetails.tagline}</div>
+
+                        <div>Production Countries: {movieDetails.production_countries.map((el, i) =>
+                            <span key={i}>
+                                {el.name}{i !== movieDetails.production_countries - 1 && ', '}
+                            </span>)}
+                        </div>
+
+                        <div>Production Companies: {movieDetails.production_companies.map((el, i) =>
+                            <span key={i}>
+                                {el.name}{i !== movieDetails.production_companies - 1 && ', '}
+                            </span>)}
+                        </div>
+
                         <div>
                             <img src={clock} alt="clock" width={18}/> {movieDetails.runtime} minutes
                         </div>

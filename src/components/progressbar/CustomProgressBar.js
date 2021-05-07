@@ -2,7 +2,7 @@ import AnimatedProgressProvider from "./AnimatedProgressProvider";
 import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
 import {easeQuadInOut} from "d3-ease";
 
-export default function CustomProgressBar({valueEnd, widthCustom, strokeWidth}) {
+export default function CustomProgressBar({valueEnd, widthCustom, strokeWidth, roundedValue = false}) {
     return (
         <AnimatedProgressProvider
             valueStart={0}
@@ -18,7 +18,7 @@ export default function CustomProgressBar({valueEnd, widthCustom, strokeWidth}) 
                         <CircularProgressbar
                             value={value}
                             strokeWidth={strokeWidth}
-                            // text={`${roundedValue}%`}
+                            text={roundedValue &&`${roundedValue}%`}
                             /* This is important to include, because if you're fully managing the
                       animation yourself, you'll want to disable the CSS animation. */
                             styles={buildStyles({
