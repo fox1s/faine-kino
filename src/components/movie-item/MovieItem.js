@@ -54,7 +54,7 @@ export default function MovieItem({onFilmClick, movie}) {
         posterDiv.style.transform = 'scale(1.06)';
         posterDiv.style.transition = '0.4s';
         posterDiv.style.opacity = '0.3';
-        setVoteFlag(true)
+        setVoteFlag(true);
     }
 
     const onMouseOut = () => {

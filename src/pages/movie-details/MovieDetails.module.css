@@ -38,10 +38,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-
     font-weight: bold;
-
-    margin-bottom: 15px;
+    margin-left: 41px;
 }
 
 .textRating {
@@ -78,4 +76,102 @@
 
 .tagline_div {
     color: #7e798f;
+}
+
+
+.movie {
+    /*border-radius: 10px;*/
+}
+
+.buttonWatchANDWishList > a {
+    width: 166px;
+    height: 44px;
+    margin-right: 8px;
+
+
+    border-radius: 5px;
+    border: 2px solid #db1818;
+    color: #db1818;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonWatchANDWishList > a:hover {
+    border: 2px solid red;
+    color: red;
+    background-color: #1c1a29;
+    text-decoration: none;
+}
+
+.watchBtn > span, .wishListBtn>span {
+    margin-left: 5px;
+}
+
+.wishListBtn {
+    width: 100px;
+    height: 44px;
+    padding: 0;
+    border-radius: 5px;
+    border: 1px solid #7e798f;
+    color: #7e798f;
+    background: transparent;
+}
+
+.wishListBtn:hover {
+    border: 1px solid white;
+    color: white;
+    /*transform: scale(0.97);*/
+}
+.wishListBtn:active {
+    transform: scale(0.95);
+}
+
+.production_companiesDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.detailNameItem {
+    width: 240px;
+}
+
+.detailBodyItem {
+    /*width: 250px;*/
+    /*flex-grow: 2;*/
+    width: 310px;
+}
+
+.itemDetail {
+    display: flex;
+    flex-direction: row;
+    line-height: 30px;
+    margin-bottom: 9px;
+}
+
+.miniDescribe > a, .miniDescribe > span > span > a, .miniDescribe {
+    color: #a5a1b2;
+    text-decoration: none;
+}
+
+
+.miniDescribe > a:hover, .miniDescribe > span > span > a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.miniClock {
+    margin-left: 15px;
+}
+
+.btnANDProgressbar {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.buttonWatchANDWishList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

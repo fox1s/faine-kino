@@ -1,15 +1,23 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from 'react-router-dom';
+import {Link, NavLink, useParams} from 'react-router-dom';
 import {moviesService} from "../../services";
 import styles from "./MovieDetails.module.css";
 import {imgBuilder} from "../../services/imgBuilder";
 
 import clock from '../../img/clock.png'
+import play from '../../img/play.png'
+import wishListNotChosen from '../../img/wishListOfFilms-NOT_CHOOSEN.png'
+import wishListChosen from '../../img/wishListOfFilms-NOT_CHOOSEN.png'
 import CustomProgressBar from "../../components/progressbar/CustomProgressBar";
+import YouTube from "react-youtube";
+import {youtubeService} from "../../services/YoutubeService";
+
 
 export default function MovieDetails() {
     const [movieDetails, setMovieDetails] = useState([]);
     const [isLoading, setIsLoading] = useState(null);
+    // const [test, setTest] = useState(null);
+    const [wishListFlag, setWishListFlag] = useState(false);
 
     const {id} = useParams();
 
@@ -17,7 +25,6 @@ export default function MovieDetails() {
         try {
             setIsLoading(true);
             const data = await moviesService.getMovieDetailsById(id);
-            console.log(data)
             setMovieDetails(data);
         } catch (e) {
             console.error(e)
@@ -26,13 +33,62 @@ export default function MovieDetails() {
         }
     }
 
+    // const getYoutubeVideo = async () => {
+    //     try {
+    //         console.log(movieDetails.title)
+    //         const youtubeData = await youtubeService.getVideoByName(movieDetails.title);
+    //         setTest(youtubeData)
+    //     } catch (e) {
+    //         console.error(e)
+    //     }
+    // }
+
     useEffect(() => {
         getMovieDetails().then(r => r);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    // useEffect(() => {
+    //     console.log('zapusk')
+    //     if (movieDetails.hasOwnProperty('original_title')) {
+    //         console.log('start...........................................................')
+    //         console.log(movieDetails)
+    //         getYoutubeVideo().then(r => r);
+    //     }
+    // },[])
+
     if (isLoading || !movieDetails || isLoading === null) {
         return <div>Loading...</div>
     }
+
+    const opts = {
+        height: '600',
+        width: '906',
+        playerVars: {
+            // https://developers.google.com/youtube/player_parameters
+            autoplay: 0,
+        },
+    };
+
+    // const onReady = (e) => {
+    //     // access to player in all event handlers via event.target
+    //     // e.target.pauseVideo();
+    // }
+
+    const onWishListBtn = (e) => {
+        const btn = e.currentTarget;
+
+        if (wishListFlag === true) {
+            btn.style.border = '1px solid #7e798f';
+            btn.style.color = '#7e798f';
+            setWishListFlag(false)
+            return
+        }
+
+        btn.style.border = '2px solid white';
+        btn.style.color = 'white';
+        setWishListFlag(true);
+    }
+
     return (
         <div className={styles.movieDetails_wrapper}>
             <div className={styles.movieDetails}>
@@ -48,50 +104,98 @@ export default function MovieDetails() {
                     </div>
 
                     <div className={styles.right_detailsCommon}>
-                        <div className={styles.customProgressBar}>
-                            <div className={styles.textRating_Div}>
-                                <div>
-                                    <span
-                                        className={styles.firstVoteNumber}>{movieDetails.vote_average.toString()[0]}</span>
-                                    <span
-                                        className={styles.secondVoteNumber}>,{movieDetails.vote_average.toString()[2]}</span>
-                                </div>
-                                <div className={styles.textRating}>Rating f-kino</div>
+
+                        <div className={styles.btnANDProgressbar}>
+                            <div className={styles.buttonWatchANDWishList}>
+                                <a href="#movie" className={styles.watchBtn}><img src={play} alt="play"
+                                                                                  width={20}/><span>Watch</span></a>
+                                <button className={styles.wishListBtn} onClick={onWishListBtn}>
+                                    <img src={wishListFlag === true ? wishListChosen : wishListNotChosen}
+                                         alt="wishList" width={20}/><span>Wishlist</span></button>
                             </div>
 
-                            <CustomProgressBar valueEnd={movieDetails.vote_average} widthCustom={70} strokeWidth={17}
-                                /*roundedValue={movieDetails.vote_count}*//>
+                            <div className={styles.customProgressBar}>
+                                <div className={styles.textRating_Div}>
+                                    <div>
+                                    <span
+                                        className={styles.firstVoteNumber}>{movieDetails.vote_average.toString()[0]}</span>
+                                        <span
+                                            className={styles.secondVoteNumber}>,{movieDetails.vote_average.toString()[2]}</span>
+                                    </div>
+                                    <div className={styles.textRating}>Rating f-kino</div>
+                                </div>
+
+                                <CustomProgressBar valueEnd={movieDetails.vote_average} widthCustom={70}
+                                                   strokeWidth={17}
+                                    /*roundedValue={movieDetails.vote_count}*//>
+                            </div>
                         </div>
 
-                        <div>Release date {movieDetails.release_date}</div>
-                        <div>Languages: {movieDetails.spoken_languages.map((lan, i) =>
-                            <span key={i}>
-                                {lan.english_name}{i !== movieDetails.spoken_languages.length - 1 && ', '}
-                            </span>)}
+
+                        <div className={styles.miniDescribe}>
+                            <Link to={'#'}>{movieDetails.release_date.toString().slice(0, 4)}</Link>,
+
+                            <span> {movieDetails.genres.map((el, i) =>
+                                <span key={i}>
+                                    <Link to={`/${el.name.toLowerCase()}-movies`}>{el.name}</Link>
+                                    <span>{i !== movieDetails.genres.length - 1 && ', '}</span>
+                                </span>
+                            )}</span>
+
+                            <span className={styles.miniClock}><img src={clock} alt="clock" width={18}
+                                                                    style={{marginBottom: '3px'}}/> {movieDetails.runtime} min</span>
                         </div>
 
-                        <div>Production Countries: {movieDetails.production_countries.map((el, i) =>
-                            <span key={i}>
+                        <div className={styles.itemDetail}>
+                            <div className={styles.detailNameItem}>Release date</div>
+                            <div className={styles.detailBodyItem}>{movieDetails.release_date}</div>
+                        </div>
+
+                        <div className={styles.itemDetail}>
+                            <div className={styles.detailNameItem}>Languages:</div>
+                            <div className={styles.detailBodyItem}>
+                                {movieDetails.spoken_languages.map((lan, i) =>
+                                    <span key={i}>
+                                        {lan.english_name}{i !== movieDetails.spoken_languages.length - 1 && ', '}
+                                    </span>)}
+                            </div>
+                        </div>
+
+                        <div className={styles.itemDetail}>
+                            <div className={styles.detailNameItem}>Production Countries:</div>
+                            <div className={styles.detailBodyItem}>{movieDetails.production_countries.map((el, i) =>
+                                <span key={i}>
                                 {el.name}{i !== movieDetails.production_countries - 1 && ', '}
-                            </span>)}
+                            </span>)}</div>
                         </div>
 
-                        <div>Production Companies: {movieDetails.production_companies.map((el, i) =>
-                            <span key={i}>
+                        <div className={styles.itemDetail}>
+                            <div className={styles.detailNameItem}>Production Companies:</div>
+                            <div className={styles.detailBodyItem}>{movieDetails.production_companies.map((el, i) =>
+                                <span key={i}>
                                 {el.name}{i !== movieDetails.production_companies - 1 && ', '}
-                            </span>)}
+                            </span>)}</div>
                         </div>
 
-                        <div>
-                            <img src={clock} alt="clock" width={18}/> {movieDetails.runtime} minutes
+                        <div className={styles.itemDetail}>
+                            <div className={styles.detailNameItem}>Runtime</div>
+                            <div className={styles.detailBodyItem}>{movieDetails.runtime} minutes</div>
                         </div>
+
                     </div>
 
                 </div>
 
                 <div className={styles.detailsDescription}>
-                    <div>Description</div>
+                    <div>OverView</div>
                     <p>{movieDetails.overview}</p>
+                </div>
+
+                <div>
+                    <div className={styles.movie} id={'movie'}>
+                        {/*{test && <YouTube videoId={test.items[0].id.videoId} opts={opts}/>}*/}
+                        {/*<YouTube videoId={'XW2E2Fnh52w'} opts={opts}/>*/}
+                    </div>
                 </div>
 
             </div>
