@@ -9,8 +9,8 @@ import play from '../../img/play.png'
 import wishListNotChosen from '../../img/wishListOfFilms-NOT_CHOOSEN.png'
 import wishListChosen from '../../img/wishListOfFilms-NOT_CHOOSEN.png'
 import CustomProgressBar from "../../components/progressbar/CustomProgressBar";
-import YouTube from "react-youtube";
-import {youtubeService} from "../../services/YoutubeService";
+// import YouTube from "react-youtube";
+// import {youtubeService} from "../../services/YoutubeService";
 
 
 export default function MovieDetails() {
@@ -60,14 +60,14 @@ export default function MovieDetails() {
         return <div>Loading...</div>
     }
 
-    const opts = {
-        height: '600',
-        width: '906',
-        playerVars: {
-            // https://developers.google.com/youtube/player_parameters
-            autoplay: 0,
-        },
-    };
+    // const opts = {
+    //     height: '600',
+    //     width: '906',
+    //     playerVars: {
+    //         // https://developers.google.com/youtube/player_parameters
+    //         autoplay: 0,
+    //     },
+    // };
 
     // const onReady = (e) => {
     //     // access to player in all event handlers via event.target
@@ -133,7 +133,7 @@ export default function MovieDetails() {
 
 
                         <div className={styles.miniDescribe}>
-                            <Link to={'#'}>{movieDetails.release_date.toString().slice(0, 4)}</Link>,
+                            {!!movieDetails.release_date && (<Link to={'#'}>{movieDetails.release_date.toString().slice(0, 4)},</Link>)}
 
                             <span> {movieDetails.genres.map((el, i) =>
                                 <span key={i}>
@@ -148,7 +148,8 @@ export default function MovieDetails() {
 
                         <div className={styles.itemDetail}>
                             <div className={styles.detailNameItem}>Release date</div>
-                            <div className={styles.detailBodyItem}>{movieDetails.release_date}</div>
+                            <div className={styles.detailBodyItem}>{!!movieDetails.release_date ?
+                                <span>{movieDetails.release_date}</span> : <span>unknown</span>}</div>
                         </div>
 
                         <div className={styles.itemDetail}>

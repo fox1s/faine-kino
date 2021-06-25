@@ -16,8 +16,6 @@ export default function MovieItem({onFilmClick, movie}) {
     } = movie;
 
 
-
-
     const [wishListFlag, setWishListFlag] = useState(false);
     // const {original_title, vote_average, release_date, poster_path} = props
 // adult: false
@@ -99,12 +97,18 @@ export default function MovieItem({onFilmClick, movie}) {
                                 <span
                                     className={styles.vote_average}>{vote_average % 1 !== 0 ? vote_average : vote_average + '.0'}</span>
                                 <div className={styles.customProgressBar}>
-                                    {voteFlag && <CustomProgressBar valueEnd={vote_average} widthCustom={22} strokeWidth={17}/>}
+                                    {voteFlag && <CustomProgressBar
+                                        valueEnd={vote_average === 0 ? 10 : vote_average}
+                                        widthCustom={22}
+                                        strokeWidth={17}
+                                        pathColor={vote_average === 0 ? 'grey' : 'red'}
+                                        // roundedValue={vote_average === 0}
+                                    />}
                                 </div>
 
                             </div>
 
-                            <span>{release_date.slice(0, 4)}, </span>
+                            {!!release_date ? (<span>{release_date.slice(0, 4)}, </span>) : <span>unknown, </span>}
                             <span>{original_language.toUpperCase()},</span> <br/>
                             <span>{movieGenresList[0].name}</span> <br/>
                             <span>{(Math.random() * (200 - 60) + 60).toFixed()} minutes</span>
